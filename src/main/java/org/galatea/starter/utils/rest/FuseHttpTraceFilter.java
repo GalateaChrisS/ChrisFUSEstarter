@@ -1,5 +1,16 @@
 package org.galatea.starter.utils.rest;
 
+import static org.galatea.starter.entrypoint.BaseRestController.EXTERNAL_REQUEST_ID;
+
+import java.io.IOException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
+import java.util.function.Predicate;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -12,18 +23,6 @@ import org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import org.springframework.web.util.WebUtils;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Random;
-import java.util.function.Predicate;
-
-import static org.galatea.starter.entrypoint.BaseRestController.EXTERNAL_REQUEST_ID;
 
 /**
  * Builds upon spring actuator's web request tracer to capture interesting audit information. We

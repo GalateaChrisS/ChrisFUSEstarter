@@ -11,8 +11,6 @@ import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
-
 /**
  * A centralized REST handler that intercepts exceptions thrown by controller calls, enabling a
  * custom response to be returned.

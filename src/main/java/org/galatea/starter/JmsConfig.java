@@ -1,5 +1,8 @@
 package org.galatea.starter;
 
+import java.util.function.BiConsumer;
+import javax.jms.ConnectionFactory;
+import javax.jms.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.galatea.starter.utils.jms.FuseJmsListenerContainerFactory;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
@@ -14,10 +17,6 @@ import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 import org.springframework.messaging.handler.annotation.support.MessageHandlerMethodFactory;
-
-import javax.jms.ConnectionFactory;
-import javax.jms.Message;
-import java.util.function.BiConsumer;
 
 @Slf4j
 @Configuration

@@ -1,5 +1,7 @@
 package org.galatea.starter.utils.jms;
 
+import java.util.function.BiConsumer;
+import javax.jms.Message;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -7,9 +9,6 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
-
-import javax.jms.Message;
-import java.util.function.BiConsumer;
 
 
 @RequiredArgsConstructor

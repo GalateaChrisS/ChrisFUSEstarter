@@ -2,6 +2,7 @@ package org.galatea.starter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.galatea.starter.utils.FuseHttpTraceRepository;
 import org.galatea.starter.utils.rest.FuseHttpTraceFilter;
@@ -18,8 +19,6 @@ import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConvert
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.List;
 
 @Slf4j
 @Configuration

@@ -1,10 +1,10 @@
 package org.galatea.starter.utils.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 /**
  * Verifies a String is a member of an enum value set.
