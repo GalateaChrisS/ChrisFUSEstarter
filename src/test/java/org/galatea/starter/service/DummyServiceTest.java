@@ -12,7 +12,7 @@ public class DummyServiceTest extends ASpringTest {
 
 
   @Test
-  public void testProcessCommandGreetMe() {
+  public void testProcessCommandGreetMeWithName() {
     String command = "greet-me";
     String name = "Chris";
     String expectedResult = "Hello Chris!";
@@ -38,7 +38,8 @@ public class DummyServiceTest extends ASpringTest {
     assertEquals(expectedResult, result);
   }
 
-  @Test public void testUnsupportedInput() {
+  @Test
+  public void testUnsupportedInput() {
     String command = "invalid command";
     String expectedResult = "Command not supported.";
 
@@ -47,5 +48,6 @@ public class DummyServiceTest extends ASpringTest {
     String result = service.processCommand(command, "");
     assertEquals(expectedResult, result);
   }
+
 }
 

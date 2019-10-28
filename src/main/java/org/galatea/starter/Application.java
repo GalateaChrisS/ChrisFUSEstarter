@@ -36,8 +36,8 @@ public class Application implements ApplicationRunner {
    */
   @Override
   public void run(final ApplicationArguments args) {
-    if (!args.containsOption("server.port") && System.getProperty("server.port") == null) {
-      throw new MissingOptionException("Server port must be set via command line parameter");
-    }
+//    if (!args.containsOption("server.port") && System.getProperty("server.port") == null) {
+//      throw new MissingOptionException("Server port must be set via command line parameter");
+//    }
   }
 }

@@ -30,7 +30,7 @@ public class StockPriceController extends BaseRestController {
   @GetMapping(value = "${webservice.stockPricePath}", produces = {MediaType.APPLICATION_JSON_VALUE})
   public String stockPriceEndpoint(
       @RequestParam(value = "command") String command,
-      @RequestParam(value = "name") String name,
+      @RequestParam(value = "name", defaultValue = "user", required = false) String name,
       @RequestParam(value = "requestId", required = false) final String requestId) {
     processRequestId(requestId);
     return dummyService.processCommand(command, name);
