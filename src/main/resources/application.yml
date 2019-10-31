@@ -57,6 +57,9 @@ spring:
     password:
   rest:
     iexBasePath: https://api.iextrading.com/1.0
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
 # set debug to get spring to log the classpath (and other things) on startup
 debug: true
 
@@ -72,4 +75,5 @@ spring:
 # Mappings for Rest Controllers
 webservice:
   halpath: /hal
+  dummyPath: /dummy
   stockPricePath: /stockprice

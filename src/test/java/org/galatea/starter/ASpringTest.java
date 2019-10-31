@@ -1,16 +1,22 @@
 package org.galatea.starter;
 
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import junitparams.mappers.IdentityMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.ClassRule;
 import org.junit.Rule;
+import org.mapstruct.Context;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jms.config.JmsListenerEndpointRegistry;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
@@ -21,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @ActiveProfiles("test")
+//@ContextConfiguration(classes={MongoConfig.class, AppConfig.class, MvcConfig.class, MethodValidationConfig.class, JmsConfig.class, SwaggerConfig.class})
 public abstract class ASpringTest {
 
   @ClassRule

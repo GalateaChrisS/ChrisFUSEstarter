@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.aspect4log.Log;
 import net.sf.aspect4log.Log.Level;
+import org.galatea.starter.service.AlphaVantageProxyService;
 import org.galatea.starter.service.DummyService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,20 +20,32 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Log(enterLevel = Level.INFO, exitLevel = Level.INFO)
 @RestController
-
 public class StockPriceController extends BaseRestController {
 
   @NonNull
   DummyService dummyService;
+  @NonNull
+  AlphaVantageProxyService alphaVantageProxyService;
+
 
   // @GetMapping to link http GET request to this method
   // @RequestParam to take a parameter from the url
-  @GetMapping(value = "${webservice.stockPricePath}", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public String stockPriceEndpoint(
+  @GetMapping(value = "${webservice.dummyPath}", produces = {MediaType.APPLICATION_JSON_VALUE})
+  public String dummyEndpoint(
       @RequestParam(value = "command") String command,
       @RequestParam(value = "name", defaultValue = "user", required = false) String name,
       @RequestParam(value = "requestId", required = false) final String requestId) {
     processRequestId(requestId);
     return dummyService.processCommand(command, name);
+  }
+
+  // @GetMapping to link http GET request to this method
+  // @RequestParam to take a parameter from the url
+  @GetMapping(value = "${webservice.stockPricePath}", produces = {MediaType.APPLICATION_JSON_VALUE})
+  public String stockPriceEndpoint(
+      @RequestParam(value = "stockTicker") String stockTicker,
+      @RequestParam(value = "requestId", required = false) final String requestId) {
+    processRequestId(requestId);
+    return alphaVantageProxyService.fetch100DaysOfStockPrice(stockTicker);
   }
 }
