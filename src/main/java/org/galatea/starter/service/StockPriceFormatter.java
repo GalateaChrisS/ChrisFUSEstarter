@@ -23,7 +23,6 @@ public class StockPriceFormatter {
     ObjectMapper mapper = new ObjectMapper();
     mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-//    return mapper.writeValueAsString(stockPriceDataList);
     return stockPriceDataList.toString();
   }
 
