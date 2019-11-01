@@ -55,18 +55,18 @@ public class StockPriceRepositoryTest extends ASpringTest {
     assertTrue(repo.existsByStockTickerAndDate(stockTicker, date));
   }
 
-  @Test
-  public void findFirstByByStockTickerAndDate() {
-
-    StockPriceData stock = new StockPriceData();
-    String stockTicker = "IBM";
-    Date date = new Date();
-
-    stock.setStockTicker(stockTicker);
-    stock.setDate(date);
-
-    repo.save(stock);
-
-    assertEquals(stock, repo.findFirstByStockTickerAndDate(stockTicker,date));
-  }
+//  @Test
+//  public void findFirstByByStockTickerAndDate() {
+//
+//    StockPriceData stock = new StockPriceData();
+//    String stockTicker = "IBM";
+//    Date date = new Date();
+//
+//    stock.setStockTicker(stockTicker);
+//    stock.setDate(date);
+//
+//    repo.save(stock);
+//
+//    assertEquals(stock, repo.findFirstByStockTickerAndDate(stockTicker,date));
+//  }
 }

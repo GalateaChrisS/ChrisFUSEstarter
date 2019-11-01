@@ -1,12 +1,20 @@
 package org.galatea.starter.entrypoint;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.aspect4log.Log;
 import net.sf.aspect4log.Log.Level;
+import org.galatea.starter.POJOs.StockPriceData;
 import org.galatea.starter.service.AlphaVantageProxyService;
 import org.galatea.starter.service.DummyService;
+import org.galatea.starter.service.StockPriceLocatorService;
+import org.galatea.starter.utils.ConverterUtility;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +34,8 @@ public class StockPriceController extends BaseRestController {
   DummyService dummyService;
   @NonNull
   AlphaVantageProxyService alphaVantageProxyService;
+  @NonNull
+  StockPriceLocatorService stockPriceLocatorService;
 
 
   // @GetMapping to link http GET request to this method
@@ -42,10 +52,12 @@ public class StockPriceController extends BaseRestController {
   // @GetMapping to link http GET request to this method
   // @RequestParam to take a parameter from the url
   @GetMapping(value = "${webservice.stockPricePath}", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public String stockPriceEndpoint(
+  public List<StockPriceData> stockPriceEndpoint(
       @RequestParam(value = "stockTicker") String stockTicker,
-      @RequestParam(value = "requestId", required = false) final String requestId) {
+      @RequestParam(value = "pastDays", defaultValue = "100", required = false) int pastDays,
+      @RequestParam(value = "requestId", required = false) final String requestId)
+      throws IOException, ParseException {
     processRequestId(requestId);
-    return alphaVantageProxyService.fetch100DaysOfStockPrice(stockTicker);
+    return stockPriceLocatorService.findStockPriceData(stockTicker, pastDays);
   }
 }

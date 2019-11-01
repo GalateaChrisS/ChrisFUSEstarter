@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @RequiredArgsConstructor
 @Slf4j
 @SpringBootApplication
-@EnableMongoRepositories
+//@EnableMongoRepositories
 public class Application implements ApplicationRunner {
 
   /**

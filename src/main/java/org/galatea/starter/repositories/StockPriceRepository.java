@@ -1,6 +1,7 @@
 package org.galatea.starter.repositories;
 
 import java.util.Date;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.aspect4log.Log;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 public interface StockPriceRepository extends MongoRepository<StockPriceData, String> {
 
   boolean existsByStockTickerAndDate(String stockTicker, Date date);
-  StockPriceData findFirstByStockTickerAndDate(String stockTicker, Date date);
+  List<StockPriceData> findByStockTickerAndDate(String stockTicker, Date date);
+  List<StockPriceData> findByStockTickerAndDateBetween(String stockTicker, Date startDate, Date endDate);
 
 }
