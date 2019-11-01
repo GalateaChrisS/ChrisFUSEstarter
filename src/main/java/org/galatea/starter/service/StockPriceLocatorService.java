@@ -27,6 +27,8 @@ public class StockPriceLocatorService {
       throws ParseException {
     List<StockPriceData> stockPriceDataList = pullFromMongoDB(stockTicker, pastDays);
     if (stockPriceDataList.size()<pastDays) { //not enough cached data
+      log.info("Not enough stock price data found, will fetch from alpha vantage");
+      log.info("stockTicker = {}", stockTicker);
       alphaVantageProxyService.transferDataFetchedFromAlphaVantageToMongoDB(stockTicker);
       stockPriceDataList = pullFromMongoDB(stockTicker, pastDays);
     }
