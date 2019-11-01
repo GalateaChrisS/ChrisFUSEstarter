@@ -17,7 +17,7 @@ public class ConverterUtility {
       throws ParseException {
     List<StockPriceData> StockPriceDataList = new LinkedList<>();
 
-    String stockTicker = jsonNode.path("Meta Data").path("2. Symbol").toString();
+    String stockTicker = jsonNode.path("Meta Data").path("2. Symbol").toString().replace("\"", "");
 
     JsonNode timeSeries = jsonNode.path("Time Series (Daily)");
 
@@ -39,7 +39,9 @@ public class ConverterUtility {
     JsonNode dateNode = entry.getValue();
     String dateString = entry.getKey();
 
-    stockPriceData.setStockTicker(stockTicker.replace("\"", ""));
+    String tickerDateID = stockTicker + dateString.replaceAll("-", "");
+    stockPriceData.set_id(tickerDateID);
+    stockPriceData.setStockTicker(stockTicker);
     stockPriceData.setOpenPrice(Double.parseDouble(dateNode.path("1. open").toString().replace("\"", "")));
     stockPriceData.setClosePrice(Double.parseDouble(dateNode.path("4. close").toString().replace("\"", "")));
     Date date = DateUtils.parseDate(dateString, "yyyy-MM-dd");

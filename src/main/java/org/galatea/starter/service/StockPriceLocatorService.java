@@ -25,20 +25,19 @@ public class StockPriceLocatorService {
 
   public List<StockPriceData> findStockPriceData(String stockTicker, int pastDays)
       throws ParseException {
-    List<StockPriceData> stockPriceDataList = pullFromMongoDB(stockTicker, pastDays);
+    List<StockPriceData> stockPriceDataList = pullFromMongoDB(stockTicker);
     if (stockPriceDataList.size()<pastDays) { //not enough cached data
       log.info("Not enough stock price data found, will fetch from alpha vantage");
       log.info("stockTicker = {}", stockTicker);
       alphaVantageProxyService.transferDataFetchedFromAlphaVantageToMongoDB(stockTicker);
-      stockPriceDataList = pullFromMongoDB(stockTicker, pastDays);
+      stockPriceDataList = pullFromMongoDB(stockTicker);
     }
-    return stockPriceDataList;
+    return stockPriceDataList.subList(0, pastDays);
   }
 
-  private List<StockPriceData> pullFromMongoDB(String stockTicker, int pastDays) {
+  private List<StockPriceData> pullFromMongoDB(String stockTicker) {
     Date todaysDate = new Date();
-    Date furthestBackDate = DateUtils.addDays(todaysDate, -pastDays);
-    return stockPriceRepository.findByStockTickerAndDateBetween(stockTicker,furthestBackDate,todaysDate);
+    return stockPriceRepository.findByStockTickerAndDateLessThan(stockTicker, todaysDate);
   }
 
 

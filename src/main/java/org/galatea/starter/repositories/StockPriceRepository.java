@@ -18,5 +18,6 @@ public interface StockPriceRepository extends MongoRepository<StockPriceData, St
   boolean existsByStockTickerAndDate(String stockTicker, Date date);
   List<StockPriceData> findByStockTickerAndDate(String stockTicker, Date date);
   List<StockPriceData> findByStockTickerAndDateBetween(String stockTicker, Date startDate, Date endDate);
+  List<StockPriceData> findByStockTickerAndDateLessThan(String stockTicker, Date todaysDate);
 
 }

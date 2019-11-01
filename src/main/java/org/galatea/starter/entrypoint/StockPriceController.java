@@ -13,11 +13,17 @@ import net.sf.aspect4log.Log.Level;
 import org.galatea.starter.POJOs.StockPriceData;
 import org.galatea.starter.service.AlphaVantageProxyService;
 import org.galatea.starter.service.DummyService;
+import org.galatea.starter.service.StockPriceFormatter;
 import org.galatea.starter.service.StockPriceLocatorService;
 import org.galatea.starter.utils.ConverterUtility;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,6 +42,8 @@ public class StockPriceController extends BaseRestController {
   AlphaVantageProxyService alphaVantageProxyService;
   @NonNull
   StockPriceLocatorService stockPriceLocatorService;
+  @NonNull
+  StockPriceFormatter stockPriceFormatter;
 
 
   // @GetMapping to link http GET request to this method
@@ -52,12 +60,13 @@ public class StockPriceController extends BaseRestController {
   // @GetMapping to link http GET request to this method
   // @RequestParam to take a parameter from the url
   @GetMapping(value = "${webservice.stockPricePath}", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<StockPriceData> stockPriceEndpoint(
+  public String stockPriceEndpoint(
       @RequestParam(value = "stockTicker") String stockTicker,
       @RequestParam(value = "pastDays", defaultValue = "100", required = false) int pastDays,
       @RequestParam(value = "requestId", required = false) final String requestId)
       throws IOException, ParseException {
     processRequestId(requestId);
-    return stockPriceLocatorService.findStockPriceData(stockTicker, pastDays);
+    List<StockPriceData> stockPriceDataList = stockPriceLocatorService.findStockPriceData(stockTicker, pastDays);
+    return stockPriceFormatter.convertToStringFromStockPriceDataList(stockPriceDataList);
   }
 }
